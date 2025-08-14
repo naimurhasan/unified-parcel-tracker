@@ -30,28 +30,39 @@ def process_tracking_request(request_id: int):
         if not request:
             return "Request not found"
         
-        # Update status to processing
+        
         request.status = "processing"
         db.commit()
         
-        # Simple math operation (as requested)
+        
         result_value = request_id * 7 + 42
         print(f"Processing request {request_id}: {request_id} * 7 + 42 = {result_value}")
-        time.sleep(5)
-        # Generate dummy result
-        dummy_result = create_dummy_result(request_id, request.vendor, request.tracking_number)
         
-        # Save result to database
+        time.sleep(3)
+        
+        dummy_data = create_dummy_result(request_id, request.vendor, request.tracking_number)
+        
+        
         db_result = models.Result(
             request_id=request_id,
-            sender=dummy_result["sender"],
-            receiver=dummy_result["receiver"],
-            parcel_current_status=dummy_result["status"],
-            events=dummy_result["events"]
+            sender=dummy_data["sender"],
+            receiver=dummy_data["receiver"],
+            parcel_current_status=dummy_data["status"]
         )
         db.add(db_result)
+        db.flush()
         
-        # Update request status to completed
+        
+        for event_data in dummy_data["events"]:
+            db_event = models.Event(
+                result_id=db_result.id,
+                event_datetime=datetime.fromisoformat(event_data["datetime"]),
+                comment=event_data["comment"],
+                location=event_data["location"]
+            )
+            db.add(db_event)
+        
+        
         request.status = "completed"
         db.commit()
         
@@ -72,7 +83,6 @@ def create_dummy_result(request_id: int, vendor: str, tracking_number: str):
     statuses = ["In Transit", "Out for Delivery", "Delivered", "At Local Hub"]
     locations = ["Dhaka Hub", "Chittagong Port", "Sylhet Branch", "Rajshahi Center", None]
     
-    # Generate 3-5 events
     num_events = random.randint(3, 5)
     events = []
     base_time = datetime.now() - timedelta(days=2)

@@ -109,7 +109,7 @@
             
             const events = result.events.map(event => 
                 `<li class="mb-1">
-                    <strong>${new Date(event.datetime).toLocaleString()}</strong>: 
+                    <strong>${new Date(event.event_datetime).toLocaleString()}</strong>: 
                     ${event.comment} 
                     ${event.location ? `<span class="badge bg-secondary">${event.location}</span>` : ''}
                 </li>`
