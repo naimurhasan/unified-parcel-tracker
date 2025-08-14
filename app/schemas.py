@@ -27,8 +27,8 @@ class EventResponse(BaseModel):
 class ResultResponse(BaseModel):
     id: int
     request_id: int
-    sender: str
-    receiver: str
+    sender: Optional[str]
+    receiver: Optional[str]
     parcel_current_status: str
     events: List[EventResponse]
     created_at: datetime
