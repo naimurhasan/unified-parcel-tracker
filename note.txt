@@ -37,10 +37,52 @@ https://t.bpodms.gov.bd/?i=DL636643547BD
 
 https://tracking.sundarbancourierltd.com/ 10887000122072
 
-https://t.bpodms.gov.bd/?i=DL636643547BD
-
 https://steadfast.com.bd/t/01K2C65E9NNGDMPB34JTXN62MQ
 
 https://steadfast.com.bd/t/01K2HMSK8P5AC74H9GABTTX0EG
 
 https://redx.com.bd/track-global-parcel/?trackingId=24A6A5WE157GB0
+
+
+SET events = '[
+  {
+    "datetime": "2025-08-14T10:00:00Z",
+    "location": "New York",
+    "status": "Dispatched",
+    "comment": "Left warehouse"
+  },
+  {
+    "datetime": "2025-08-15T14:30:00Z",
+    "location": "Chicago",
+    "status": "In Transit",
+    "comment": "Arrived at sorting center"
+  }
+]'::json
+
+
+INSERT INTO results (
+    request_id,
+    sender,
+    receiver,
+    parcel_current_status,
+    events
+) VALUES (
+    1,
+    'alice@example.com',
+    'bob@example.com',
+    'In Transit',
+    '[
+        {
+            "datetime": "2025-08-14T10:00:00Z",
+            "location": "New York",
+            "status": "Dispatched",
+            "comment": "Left warehouse"
+        },
+        {
+            "datetime": "2025-08-15T14:30:00Z",
+            "location": "Chicago",
+            "status": "In Transit",
+            "comment": "Arrived at sorting center"
+        }
+        ]'::json
+);
