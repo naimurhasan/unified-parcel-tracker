@@ -1,0 +1,46 @@
+language: python
+
+requirement:
+Web app:
+    In Docker. Python. FastApi.
+    Person come to my website: Create a tracking request:
+
+            Courier name [sundarban, steadfast], percel id
+                -> Put the request in a queue
+            Request
+            Scheduler, scrape the thing.
+            Status, Series
+
+            AWS, Google Cloud
+
+            Event id, date, raw
+
+Trash note:
+S3, EC2, ISC.
+
+Quart
+
+request -> 
+json
+html
+    Last mile.
+    Internationl logistics.
+
+
+
+Question:
+    playwright must?
+    TractRequest Object, Sender Receiver, 
+    ki ki data rakhbo.
+
+https://t.bpodms.gov.bd/?i=DL636643547BD
+
+https://tracking.sundarbancourierltd.com/ 10887000122072
+
+https://t.bpodms.gov.bd/?i=DL636643547BD
+
+https://steadfast.com.bd/t/01K2C65E9NNGDMPB34JTXN62MQ
+
+https://steadfast.com.bd/t/01K2HMSK8P5AC74H9GABTTX0EG
+
+https://redx.com.bd/track-global-parcel/?trackingId=24A6A5WE157GB0
