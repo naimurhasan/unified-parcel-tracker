@@ -43,6 +43,7 @@ https://steadfast.com.bd/t/01K2HMSK8P5AC74H9GABTTX0EG
 
 https://redx.com.bd/track-global-parcel/?trackingId=24A6A5WE157GB0
 
+make event as a Model
 
 SET events = '[
   {
@@ -96,3 +97,610 @@ docker-compose exec worker celery -A app.celery_app call app.tasks.process_pendi
 
 # Reset everything
 docker-compose down -v && docker-compose up --build
+
+
+###### #### #### ## REDX
+https://api.redx.com.bd/parcel-track/24A6A5WE157GB0
+```
+{
+    "isError": false,
+    "parcel": {
+        "ID": "24A6A5WE157GB0",
+        "CUSTOMER_NAME": "Joba Fashion",
+        "SHOP_ID": 683770,
+        "CREATED_AT": "2024-06-05T11:58:28.000Z",
+        "AREA": "Jurain(Dhaka)",
+        "IS_ISSUE_RAISED": false,
+        "AREA_ID": 408,
+        "SOURCE_HUB_ID": 9,
+        "STATUS": "cash-received",
+        "issues": [],
+        "DELIVERY_HUB_CONTACT_INFORMATION": null
+    }
+}
+```
+
+###### ### ### ### ### BPO
+https://api.redx.com.bd/v1/logistics/global-tracking/24A6A5WE157GB0
+```
+{
+    "isError": false,
+    "tracking": [
+        {
+            "messageEn": "Parcel is created successfully",
+            "messageBn": "পার্সেলটি পিকআপের জন্য মার্চেন্ট অনুরোধ করেছেন",
+            "status": "pickup-pending",
+            "groupedStatus": "pickup-pending",
+            "action": "pickup-pending",
+            "time": "2024-06-05T11:58:28.000Z"
+        },
+        {
+            "messageEn": "Parcel is picked up",
+            "messageBn": "পার্সেল পিকাপ সম্পন্ন হয়েছে ",
+            "status": "ready-for-delivery",
+            "groupedStatus": "parcel_received",
+            "action": "received-from-seller",
+            "time": "2024-06-05T15:03:44.000Z"
+        },
+        {
+            "messageEn": "Parcel is ready for transfer from Puran Dhaka Hub to REDX Central Mother Hub",
+            "messageBn": "পার্সেলটি Puran Dhaka Hub হতে  REDX Central Mother Hub এর গাড়িতে ওঠার অপেক্ষায় আছে",
+            "status": "line-haul-in-progress",
+            "groupedStatus": "line-haul-in-progress",
+            "action": "dispatched-to-line-haul",
+            "time": "2024-06-05T15:16:04.000Z"
+        },
+        {
+            "messageEn": "Parcel carrying vehicle has left from Puran Dhaka Hub for REDX Central Mother Hub",
+            "messageBn": "পার্সেলটির গাড়ি REDX Central Mother Hub এর উদ্দেশ্যে Puran Dhaka Hub ছেড়ে গিয়েছে",
+            "status": "line-haul-trip-started",
+            "groupedStatus": "line-haul-trip-started",
+            "action": "trip-started",
+            "time": "2024-06-05T16:43:18.000Z"
+        },
+        {
+            "messageEn": "Parcel carrying vehicle has reached REDX Central Mother Hub",
+            "messageBn": "পার্সেলটির গাড়ি REDX Central Mother Hub এ পৌছে গেছে",
+            "status": "line-haul-bulk-dropped",
+            "groupedStatus": "line-haul-bulk-dropped",
+            "action": "bulk-dropped",
+            "time": "2024-06-05T20:18:35.000Z"
+        },
+        {
+            "messageEn": "Parcel is unloaded from the vehicle in REDX Central Mother Hub",
+            "messageBn": "পার্সেলটি REDX Central Mother Hub এ গাড়ি থেকে নামানো হয়েছে",
+            "status": "bulk-transfer-received",
+            "groupedStatus": "bulk-transfer-received",
+            "action": "received-transfer",
+            "time": "2024-06-05T20:28:20.000Z"
+        },
+        {
+            "messageEn": "Parcel transitted from REDX Central Mother Hub",
+            "messageBn": "পার্সেলটি REDX Central Mother Hub থেকে ট্রান্সিট হয়েছে",
+            "status": "bulk-transfer-received",
+            "groupedStatus": "line-haul-transitted",
+            "action": "received-transit",
+            "time": "2024-06-05T20:41:37.000Z"
+        },
+        {
+            "messageEn": "Parcel is received in Jatrabari Hub",
+            "messageBn": "পার্সেলটি Jatrabari Hub এ রিসিভ করা হয়েছে",
+            "status": "ready-for-delivery",
+            "groupedStatus": "parcel_processing",
+            "action": "received-from-hub",
+            "time": "2024-06-06T02:38:51.000Z"
+        },
+        {
+            "messageEn": "Parcel is on the way to delivery by MD.NAZMUL ISLAM(8801953984981)",
+            "messageBn": "ডেলিভারি এজেন্ট MD.NAZMUL ISLAM(8801953984981) ডেলিভারির জন্যে বের হয়েছে",
+            "status": "delivery-in-progress",
+            "groupedStatus": "delivery_on_the_way",
+            "action": "dispatched-to-agent",
+            "time": "2024-06-06T03:34:13.000Z"
+        },
+        {
+            "messageEn": "Parcel is Delivered Successfully",
+            "messageBn": "পার্সেল ডেলিভারি সম্পন্ন হয়েছে",
+            "status": "delivery-payment-collected",
+            "groupedStatus": "delivered",
+            "action": "delivery-payment-collected",
+            "time": "2024-06-06T10:48:05.000Z"
+        }
+    ]
+}
+```
+
+
+### BPO
+https://t.bpodms.gov.bd/get_events?item_id=DL636643547BD
+```
+{
+    "events": [
+        {
+            "branch": "121500 Tejgaon",
+            "date": "2025-01-03",
+            "description": "Item Booked at 121500 Tejgaon",
+            "item_type": "Letter Registry",
+            "status": "Booked",
+            "time": "09:22:37 PM",
+            "type": "A"
+        },
+        {
+            "branch": "121500 Tejgaon",
+            "date": "2025-01-04",
+            "description": "Item Dispatched from 121500 Tejgaon, Next Destination 110000 Dhaka Sadar",
+            "item_type": "",
+            "status": "Dispatched From Branch Office",
+            "time": "07:08:08 PM",
+            "type": ""
+        },
+        {
+            "branch": "110000 Dhaka Sadar",
+            "date": "2025-01-04",
+            "description": "Item has Landed at 110000 Dhaka Sadar",
+            "item_type": "",
+            "status": "Landed at Branch Office",
+            "time": "10:30:34 PM",
+            "type": ""
+        },
+        {
+            "branch": "110000 Dhaka Sadar",
+            "date": "2025-01-06",
+            "description": "Item is Received at 110000 Dhaka Sadar",
+            "item_type": "0",
+            "status": "Received at Branch Office",
+            "time": "05:08:55 PM",
+            "type": "G"
+        },
+        {
+            "branch": "110000 Dhaka Sadar",
+            "date": "2025-01-07",
+            "description": "Item is Delivered to Recipient",
+            "item_type": "0",
+            "status": "Delivered",
+            "time": "03:56:55 PM",
+            "type": "I"
+        }
+    ],
+    "item_id": "DL636643547BD"
+}
+```
+
+### STEADFAST
+https://steadfast.com.bd/track/consignment/01K2C65E9NNGDMPB34JTXN62MQ
+{
+    "status": 1,
+    "message": "Tracking found",
+    "result": {
+        "created_at": "2025-08-11T09:07:43.000000Z",
+        "id": 164510762,
+        "cus_name": "Md Naimur Hasan Alom",
+        "cus_address": "House: 12  Plot: 12  Road 06  Block: C  Sector: 17 Uttara-1230  Dhaka",
+        "cus_phone": "01737959836",
+        "cod_amount": 250,
+        "track_id": "01K2C65E9NNGDMPB34JTXN62MQ",
+        "invoice": "water gun1",
+        "status": 2,
+        "dm_id": 46769,
+        "current_hub": 360,
+        "user_id": 1155838,
+        "point_delivery": 0,
+        "user": {
+            "id": 1155838,
+            "b_name": "Druto BD"
+        },
+        "rider": {
+            "id": 46769,
+            "name": "Ripon Ray Rishan (Turag)",
+            "phone": "01315118181"
+        },
+        "currenthub": {
+            "id": 360,
+            "name": "Turag",
+            "phone": "01329683106"
+        }
+    },
+    "trackings": [
+        {
+            "id": 1071742724,
+            "consignment_id": 164510762,
+            "sender_id": null,
+            "tracking_type": 18,
+            "icon": null,
+            "text": "Consignment has been marked as delivered by rider.",
+            "user_type": null,
+            "user_id": null,
+            "deliveryman_id": 46769,
+            "admin_id": null,
+            "updated_by": null,
+            "confirm_status": 0,
+            "status": 1,
+            "hide_sender": 0,
+            "created_at": "2025-08-12T12:04:21.000000Z",
+            "updated_at": "2025-08-12T12:04:21.000000Z",
+            "deliveryman": {
+                "id": 46769,
+                "name": "Ripon Ray Rishan (Turag)",
+                "email": null,
+                "username": "01315118181",
+                "type": 1,
+                "role": 1,
+                "level": 1,
+                "pending_limit": null,
+                "pending_capacity": null,
+                "cancel_disable": null,
+                "phone": "01315118181",
+                "alt_phone": null,
+                "address": "Gabrol, Rothbazar, Joldhaka, Reff by Facebook to Momin vai, Z.M.",
+                "nid_number": null,
+                "br_number": null,
+                "latitude": null,
+                "longitude": null,
+                "position_updated_at": null,
+                "hub_id": 360,
+                "secondary_hub_id": null,
+                "admin_id": null,
+                "average_rating": 4.8,
+                "status": "1",
+                "created_at": "2025-02-13T05:57:57.000000Z",
+                "updated_at": "2025-08-14T10:49:24.000000Z"
+            }
+        },
+        {
+            "id": 1070968334,
+            "consignment_id": 164510762,
+            "sender_id": null,
+            "tracking_type": 11,
+            "icon": null,
+            "text": "Assigned to rider.",
+            "user_type": null,
+            "user_id": null,
+            "deliveryman_id": 46769,
+            "admin_id": 3801,
+            "updated_by": null,
+            "confirm_status": 0,
+            "status": 1,
+            "hide_sender": 0,
+            "created_at": "2025-08-12T06:36:02.000000Z",
+            "updated_at": "2025-08-12T06:36:02.000000Z",
+            "deliveryman": {
+                "id": 46769,
+                "name": "Ripon Ray Rishan (Turag)",
+                "email": null,
+                "username": "01315118181",
+                "type": 1,
+                "role": 1,
+                "level": 1,
+                "pending_limit": null,
+                "pending_capacity": null,
+                "cancel_disable": null,
+                "phone": "01315118181",
+                "alt_phone": null,
+                "address": "Gabrol, Rothbazar, Joldhaka, Reff by Facebook to Momin vai, Z.M.",
+                "nid_number": null,
+                "br_number": null,
+                "latitude": null,
+                "longitude": null,
+                "position_updated_at": null,
+                "hub_id": 360,
+                "secondary_hub_id": null,
+                "admin_id": null,
+                "average_rating": 4.8,
+                "status": "1",
+                "created_at": "2025-02-13T05:57:57.000000Z",
+                "updated_at": "2025-08-14T10:49:24.000000Z"
+            }
+        },
+        {
+            "id": 1070938987,
+            "consignment_id": 164510762,
+            "sender_id": null,
+            "tracking_type": 3,
+            "icon": null,
+            "text": "Consignment has been received at TURAG.",
+            "user_type": null,
+            "user_id": null,
+            "deliveryman_id": null,
+            "admin_id": 3801,
+            "updated_by": null,
+            "confirm_status": 0,
+            "status": 1,
+            "hide_sender": 0,
+            "created_at": "2025-08-12T06:26:48.000000Z",
+            "updated_at": "2025-08-12T06:26:48.000000Z",
+            "deliveryman": null
+        },
+        {
+            "id": 1070749418,
+            "consignment_id": 164510762,
+            "sender_id": null,
+            "tracking_type": 3,
+            "icon": null,
+            "text": "Consignment sent to TURAG.  Dispatch ID: 7216900",
+            "user_type": null,
+            "user_id": null,
+            "deliveryman_id": null,
+            "admin_id": 4779,
+            "updated_by": null,
+            "confirm_status": 0,
+            "status": 1,
+            "hide_sender": 0,
+            "created_at": "2025-08-12T05:25:50.000000Z",
+            "updated_at": "2025-08-12T05:25:50.000000Z",
+            "deliveryman": null
+        },
+        {
+            "id": 1070722240,
+            "consignment_id": 164510762,
+            "sender_id": null,
+            "tracking_type": 3,
+            "icon": null,
+            "text": "Consignment has been received at UTTARA.",
+            "user_type": null,
+            "user_id": null,
+            "deliveryman_id": null,
+            "admin_id": 4513,
+            "updated_by": null,
+            "confirm_status": 0,
+            "status": 1,
+            "hide_sender": 0,
+            "created_at": "2025-08-12T05:16:59.000000Z",
+            "updated_at": "2025-08-12T05:16:59.000000Z",
+            "deliveryman": null
+        },
+        {
+            "id": 1070249135,
+            "consignment_id": 164510762,
+            "sender_id": null,
+            "tracking_type": 3,
+            "icon": null,
+            "text": "Consignment sent to UTTARA.  Dispatch ID: 7213975",
+            "user_type": null,
+            "user_id": null,
+            "deliveryman_id": null,
+            "admin_id": 4968,
+            "updated_by": null,
+            "confirm_status": 0,
+            "status": 1,
+            "hide_sender": 0,
+            "created_at": "2025-08-12T00:45:46.000000Z",
+            "updated_at": "2025-08-12T00:45:46.000000Z",
+            "deliveryman": null
+        },
+        {
+            "id": 1070239794,
+            "consignment_id": 164510762,
+            "sender_id": null,
+            "tracking_type": 3,
+            "icon": null,
+            "text": "Consignment has been received at FULFILLMENT WAREHOUSE.",
+            "user_type": null,
+            "user_id": null,
+            "deliveryman_id": null,
+            "admin_id": 2741,
+            "updated_by": null,
+            "confirm_status": 0,
+            "status": 1,
+            "hide_sender": 0,
+            "created_at": "2025-08-12T00:29:34.000000Z",
+            "updated_at": "2025-08-12T00:29:34.000000Z",
+            "deliveryman": null
+        },
+        {
+            "id": 1069888144,
+            "consignment_id": 164510762,
+            "sender_id": null,
+            "tracking_type": 3,
+            "icon": null,
+            "text": "Consignment sent to FULFILLMENT WAREHOUSE.  Dispatch ID: 7209552",
+            "user_type": null,
+            "user_id": null,
+            "deliveryman_id": null,
+            "admin_id": 5393,
+            "updated_by": null,
+            "confirm_status": 0,
+            "status": 1,
+            "hide_sender": 0,
+            "created_at": "2025-08-11T20:17:45.000000Z",
+            "updated_at": "2025-08-11T20:17:45.000000Z",
+            "deliveryman": null
+        },
+        {
+            "id": 1069884852,
+            "consignment_id": 164510762,
+            "sender_id": 1155838,
+            "tracking_type": 10,
+            "icon": null,
+            "text": "Consignment status has been updated as Pending",
+            "user_type": null,
+            "user_id": null,
+            "deliveryman_id": null,
+            "admin_id": 3833,
+            "updated_by": null,
+            "confirm_status": 0,
+            "status": 1,
+            "hide_sender": 0,
+            "created_at": "2025-08-11T20:16:18.000000Z",
+            "updated_at": "2025-08-11T20:16:18.000000Z",
+            "deliveryman": null
+        }
+    ]
+}
+
+https://tracking.sundarbancourierltd.com/Home/getDatabyCN
+```
+[
+    {
+        "cnNumber": "10887000122072",
+        "cnFrom": "10887000122072",
+        "cnStatus": null,
+        "packetSerial": null,
+        "destBranch": "Lalmonirhat",
+        "bookingBranch": "Uttara-15",
+        "partyCode": null,
+        "statusDate": "2025-08-08T00:00:00",
+        "statusBranch": "\u09B2\u09BE\u09B2\u09AE\u09A8\u09BF\u09B0\u09B9\u09BE\u099F",
+        "bookingDate": "2025-08-08T00:00:00",
+        "lotQty": 1,
+        "quantity": null,
+        "itemName": null,
+        "itemDescription": "WP/ CLOTH",
+        "manifestNo": 0,
+        "vehicleNo": null,
+        "status": "Delivered",
+        "dlvtagNo": null,
+        "reference": null,
+        "dept": null,
+        "cnType": null,
+        "serviceType": null,
+        "sender": null,
+        "senderAdd": null,
+        "senderContact": null,
+        "receiver": null,
+        "receiverAdd": null,
+        "receiverContact": "*******9111",
+        "charge": null,
+        "conditionAmount": null,
+        "paymentOption": null,
+        "deliveryType": null,
+        "remarks": null,
+        "returnCn": null,
+        "inputUser": null,
+        "inputDate": null,
+        "vddate": null,
+        "vdcn": null,
+        "vdcharge": null,
+        "smsId": null,
+        "downloadSubBranchName": null,
+        "smsSendTime": null,
+        "cnStatusList": [
+            {
+                "cnNumber": null,
+                "statusDate": "2025-08-08T00:00:00",
+                "status": "Booking Complete",
+                "vehicleNo": null,
+                "inputDate": null,
+                "inputUser": null,
+                "fromMainBranch": null,
+                "fromSubBranch": "\u0989\u09A4\u09CD\u09A4\u09B0\u09BE \u09B8\u09C7\u0995\u09CD\u099F\u09B0 \u09E7\u09EB ",
+                "toMainBranch": null,
+                "toSubBranch": null,
+                "comRegNo": null,
+                "amendmentId": 0,
+                "bagNo": null,
+                "downloadSubBranchName": null,
+                "deliveryMan": null,
+                "loaderName": null,
+                "pointNo": null,
+                "scanType": null,
+                "createDateTime": null
+            },
+            {
+                "cnNumber": null,
+                "statusDate": "2025-08-08T00:00:00",
+                "status": "Out for Destination",
+                "vehicleNo": "Dhaka Metro AU-14-1777",
+                "inputDate": null,
+                "inputUser": null,
+                "fromMainBranch": null,
+                "fromSubBranch": "\u0989\u09A4\u09CD\u09A4\u09B0\u09BE \u09B8\u09C7\u0995\u09CD\u099F\u09B0 \u09E7\u09EB ",
+                "toMainBranch": null,
+                "toSubBranch": null,
+                "comRegNo": null,
+                "amendmentId": 0,
+                "bagNo": "Non",
+                "downloadSubBranchName": "\u09A2\u09BE\u0995\u09BE \u09A4\u09C7\u099C\u0997\u09BE\u0981\u0993 \u09B6\u09BE\u0996\u09BE",
+                "deliveryMan": null,
+                "loaderName": null,
+                "pointNo": null,
+                "scanType": null,
+                "createDateTime": null
+            },
+            {
+                "cnNumber": null,
+                "statusDate": "2025-08-08T00:00:00",
+                "status": "Received by Dest.",
+                "vehicleNo": "N/A",
+                "inputDate": null,
+                "inputUser": null,
+                "fromMainBranch": null,
+                "fromSubBranch": "\u09B9\u09BE\u09AC \u09A4\u09C7\u099C\u0997\u09BE\u0981\u0993",
+                "toMainBranch": null,
+                "toSubBranch": null,
+                "comRegNo": null,
+                "amendmentId": 0,
+                "bagNo": "Evening",
+                "downloadSubBranchName": null,
+                "deliveryMan": null,
+                "loaderName": null,
+                "pointNo": null,
+                "scanType": null,
+                "createDateTime": null
+            },
+            {
+                "cnNumber": null,
+                "statusDate": "2025-08-08T00:00:00",
+                "status": "Out for Destination",
+                "vehicleNo": "N/A",
+                "inputDate": null,
+                "inputUser": null,
+                "fromMainBranch": null,
+                "fromSubBranch": "\u09B9\u09BE\u09AC \u09A4\u09C7\u099C\u0997\u09BE\u0981\u0993",
+                "toMainBranch": null,
+                "toSubBranch": null,
+                "comRegNo": null,
+                "amendmentId": 0,
+                "bagNo": "Lmh-htj",
+                "downloadSubBranchName": "\u09B2\u09BE\u09B2\u09AE\u09A8\u09BF\u09B0\u09B9\u09BE\u099F",
+                "deliveryMan": null,
+                "loaderName": null,
+                "pointNo": null,
+                "scanType": null,
+                "createDateTime": null
+            },
+            {
+                "cnNumber": null,
+                "statusDate": "2025-08-09T00:00:00",
+                "status": "Ready for C/D",
+                "vehicleNo": null,
+                "inputDate": null,
+                "inputUser": null,
+                "fromMainBranch": null,
+                "fromSubBranch": "\u09B2\u09BE\u09B2\u09AE\u09A8\u09BF\u09B0\u09B9\u09BE\u099F",
+                "toMainBranch": null,
+                "toSubBranch": null,
+                "comRegNo": null,
+                "amendmentId": 0,
+                "bagNo": "58",
+                "downloadSubBranchName": null,
+                "deliveryMan": "LMH_CR_DC",
+                "loaderName": null,
+                "pointNo": null,
+                "scanType": null,
+                "createDateTime": null
+            },
+            {
+                "cnNumber": null,
+                "statusDate": "2025-08-09T00:00:00",
+                "status": "Delivered",
+                "vehicleNo": null,
+                "inputDate": null,
+                "inputUser": null,
+                "fromMainBranch": null,
+                "fromSubBranch": "\u09B2\u09BE\u09B2\u09AE\u09A8\u09BF\u09B0\u09B9\u09BE\u099F",
+                "toMainBranch": null,
+                "toSubBranch": null,
+                "comRegNo": null,
+                "amendmentId": 0,
+                "bagNo": null,
+                "downloadSubBranchName": null,
+                "deliveryMan": "masud_lmh_dm",
+                "loaderName": null,
+                "pointNo": null,
+                "scanType": null,
+                "createDateTime": null
+            }
+        ]
+    }
+]
+```
