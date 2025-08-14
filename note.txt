@@ -86,3 +86,13 @@ INSERT INTO results (
         }
         ]'::json
 );
+
+# View logs
+docker-compose logs worker
+docker-compose logs beat
+
+# Execute one-time task
+docker-compose exec worker celery -A app.celery_app call app.tasks.process_pending_requests
+
+# Reset everything
+docker-compose down -v && docker-compose up --build

@@ -8,6 +8,12 @@
     <div class="container mt-5">
         <h1 class="mb-4">🌅 Sunbeam Mail Track</h1>
         
+        <div class="alert alert-info">
+            <strong>Services:</strong> 
+            <a href="http://localhost:5555" target="_blank" class="btn btn-sm btn-outline-primary">Flower (Celery Monitor)</a>
+            <span class="ms-3">Hourly auto-processing enabled</span>
+        </div>
+        
         <div class="row">
             <div class="col-md-6">
                 <form id="trackingForm">
@@ -15,7 +21,6 @@
                         <label class="form-label">Vendor</label>
                         <select class="form-select" name="vendor" required>
                             <option value="">Select Vendor</option>
-                            <option value="BPO">Bangladesh Post Office</option>
                             <option value="Sundarban">Sundarban</option>
                             <option value="Steadfast">Steadfast</option>
                         </select>
@@ -53,7 +58,10 @@
             
             const result = await response.json();
             document.getElementById('result').innerHTML = 
-                `<div class="alert alert-success">Request submitted! ID: ${result.id}, Status: ${result.status}</div>`;
+                `<div class="alert alert-success">
+                    Request submitted! ID: ${result.id}, Status: ${result.status}
+                    <br><small>Will be processed automatically within an hour, or click "Process Now" below</small>
+                </div>`;
             
             loadRequests();
         };
@@ -66,11 +74,33 @@
                 `<div class="card mb-2">
                     <div class="card-body">
                         <strong>${req.vendor}</strong> - ${req.tracking_number} 
-                        <span class="badge bg-${req.status === 'completed' ? 'success' : 'warning'}">${req.status}</span>
+                        <span class="badge bg-${getStatusColor(req.status)}">${req.status}</span>
+                        ${req.status === 'pending' ? `<button class="btn btn-sm btn-warning ms-2" onclick="processNow(${req.id})">Process Now</button>` : ''}
                         ${req.status === 'completed' ? `<button class="btn btn-sm btn-info ms-2" onclick="viewResult(${req.id})">View Result</button>` : ''}
+                        <small class="text-muted d-block">${new Date(req.created_at).toLocaleString()}</small>
                     </div>
                 </div>`
             ).join('');
+        }
+
+        function getStatusColor(status) {
+            switch(status) {
+                case 'completed': return 'success';
+                case 'processing': return 'primary';
+                case 'failed': return 'danger';
+                default: return 'warning';
+            }
+        }
+
+        async function processNow(requestId) {
+            const response = await fetch(`/process/${requestId}`, { method: 'POST' });
+            const result = await response.json();
+            
+            document.getElementById('result').innerHTML = 
+                `<div class="alert alert-info">${result.message}</div>`;
+            
+            // Refresh requests after a moment
+            setTimeout(loadRequests, 2000);
         }
 
         async function viewResult(requestId) {
@@ -78,22 +108,40 @@
             const result = await response.json();
             
             const events = result.events.map(event => 
-                `<li><strong>${event.datetime}</strong>: ${event.comment} ${event.location ? `(${event.location})` : ''}</li>`
+                `<li class="mb-1">
+                    <strong>${new Date(event.datetime).toLocaleString()}</strong>: 
+                    ${event.comment} 
+                    ${event.location ? `<span class="badge bg-secondary">${event.location}</span>` : ''}
+                </li>`
             ).join('');
             
             document.getElementById('result').innerHTML = 
                 `<div class="card">
-                    <div class="card-header">Tracking Result</div>
+                    <div class="card-header">
+                        <h5>📦 Tracking Result</h5>
+                    </div>
                     <div class="card-body">
-                        <p><strong>From:</strong> ${result.sender}</p>
-                        <p><strong>To:</strong> ${result.receiver}</p>
-                        <p><strong>Status:</strong> ${result.parcel_current_status}</p>
-                        <h6>Events:</h6>
-                        <ul>${events}</ul>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>From:</strong> ${result.sender}</p>
+                                <p><strong>To:</strong> ${result.receiver}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Current Status:</strong> 
+                                    <span class="badge bg-success">${result.parcel_current_status}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <h6>📋 Event History:</h6>
+                        <ul class="list-unstyled">${events}</ul>
                     </div>
                 </div>`;
         }
 
+        // Auto refresh every 10 seconds
+        setInterval(loadRequests, 10000);
+        
         loadRequests();
     </script>
 </body>

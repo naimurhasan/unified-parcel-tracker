@@ -7,6 +7,7 @@ from typing import List
 
 from app.database import engine, get_db
 from app import models, schemas
+from app.tasks import process_tracking_request
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -41,6 +42,18 @@ async def get_result(request_id: int, db: Session = Depends(get_db)):
     if not result:
         raise HTTPException(status_code=404, detail="Result not found")
     return result
+
+# just incase | if manual processing is needed 
+@app.post("/process/{request_id}")
+async def manual_process(request_id: int, db: Session = Depends(get_db)):
+    request = db.query(models.Request).filter(models.Request.id == request_id).first()
+    if not request:
+        raise HTTPException(status_code=404, detail="Request not found")
+    
+    # Trigger manual processing
+    task = process_tracking_request.delay(request_id)
+    return {"message": "Processing started", "task_id": task.id}
+
 
 @app.get("/health")
 async def health_check():
