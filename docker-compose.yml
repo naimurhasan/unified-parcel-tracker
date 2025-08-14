@@ -6,7 +6,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql://postgres:password@db:5432/sunbeam_mail_track
+      - DATABASE_URL=postgresql://postgres:password@db:5432/unified_parcel_tracker
       - REDIS_URL=redis://redis:6379/0
     depends_on:
       - db
@@ -18,7 +18,7 @@ services:
   db:
     image: postgres:15
     environment:
-      - POSTGRES_DB=sunbeam_mail_track
+      - POSTGRES_DB=unified_parcel_tracker
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
     ports:
@@ -35,7 +35,7 @@ services:
     build: .
     command: celery -A app.celery_app worker --loglevel=info
     environment:
-      - DATABASE_URL=postgresql://postgres:password@db:5432/sunbeam_mail_track
+      - DATABASE_URL=postgresql://postgres:password@db:5432/unified_parcel_tracker
       - REDIS_URL=redis://redis:6379/0
     depends_on:
       - db
@@ -47,7 +47,7 @@ services:
     build: .
     command: celery -A app.celery_app beat --loglevel=info
     environment:
-      - DATABASE_URL=postgresql://postgres:password@db:5432/sunbeam_mail_track
+      - DATABASE_URL=postgresql://postgres:password@db:5432/unified_parcel_tracker
       - REDIS_URL=redis://redis:6379/0
     depends_on:
       - db

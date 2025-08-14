@@ -4,14 +4,15 @@ from fastapi.requests import Request
 from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
 from typing import List
+from .tasks import process_tracking_request
 
 from app.database import engine, get_db
 from app import models, schemas
-from app.tasks import process_tracking_request
+from .database import engine, Base
 
-models.Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Sunbeam Mail Track", version="1.0.0")
+app = FastAPI(title="Unified Parcel Tracker", version="1.0.0")
 templates = Jinja2Templates(directory="templates")
 
 @app.get("/", response_class=HTMLResponse)
