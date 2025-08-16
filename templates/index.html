@@ -3,46 +3,254 @@
 <head>
     <title>Unified Parcel Tracker</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .main-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            padding: 30px;
+        }
+        
+        .header-section {
+            background-color: #495057;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .header-section h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .form-card {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: #495057;
+            margin-bottom: 8px;
+        }
+        
+        .form-select, .form-control {
+            border-radius: 6px;
+            border: 1px solid #ced4da;
+            padding: 10px 12px;
+        }
+        
+        .form-select:focus, .form-control:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+        }
+        
+        .btn-track {
+            background-color: #0d6efd;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .btn-track:hover {
+            background-color: #0b5ed7;
+            color: white;
+        }
+        
+        .result-card {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        
+        .result-header {
+            background-color: #28a745;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+        }
+        
+        .tracking-info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .tracking-table th {
+            background-color: #6c757d;
+            color: white;
+            font-weight: 500;
+            text-align: center;
+            padding: 12px 8px;
+            border: none;
+            font-size: 0.9rem;
+        }
+        
+        .tracking-table td {
+            padding: 12px 8px;
+            text-align: center;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 0.9rem;
+        }
+        
+        .tracking-table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 0.8rem;
+        }
+        
+        .status-booked { background-color: #cce5ff; color: #004085; }
+        .status-dispatched { background-color: #fff3cd; color: #856404; }
+        .status-landed { background-color: #e2e3ff; color: #383d41; }
+        .status-received { background-color: #d4edda; color: #155724; }
+        .status-delivered { background-color: #d1ecf1; color: #0c5460; }
+        
+        .requests-section {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .request-card {
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .request-card:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .btn-action {
+            border-radius: 15px;
+            padding: 4px 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin: 0 3px;
+        }
+        
+        .service-info {
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+        }
+        
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .header-section h1 {
+                font-size: 1.5rem;
+            }
+            
+            .tracking-table {
+                font-size: 0.8rem;
+            }
+            
+            .tracking-table th,
+            .tracking-table td {
+                padding: 8px 4px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="mb-4">📦 Unified Parcel Tracker</h1>
-        
-        <div class="alert alert-info">
-            <strong>Services:</strong> 
-            <a href="http://localhost:5555" target="_blank" class="btn btn-sm btn-outline-primary">Flower (Celery Monitor)</a>
-            <span class="ms-3">Hourly auto-processing enabled</span>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-6">
-                <form id="trackingForm">
-                    <div class="mb-3">
-                        <label class="form-label">Vendor</label>
-                        <select class="form-select" name="vendor" required>
-                            <option value="">Select Vendor</option>
-                            <option value="BPO">BPO</option>
-                            <option value="STEADFAST">STEADFAST</option>
-                            <option value="Sundarban">Sundarban</option>
-                            <option value="REDX">REDX</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Tracking Number</label>
-                        <input type="text" class="form-control" name="tracking_number" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Track Package</button>
-                </form>
+    <div class="container-fluid">
+        <div class="main-container">
+            <div class="header-section">
+                <h1><i class="fas fa-shipping-fast"></i> Unified Parcel Tracker</h1>
+                <small>Track all your parcels from multiple vendors in one place</small>
             </div>
             
-            <div class="col-md-6">
-                <div id="result" class="mt-4"></div>
+            <div class="service-info">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <strong><i class="fas fa-cogs"></i> Services:</strong> 
+                        <a href="http://localhost:5555" target="_blank" class="btn btn-sm btn-outline-secondary ms-2">
+                            <i class="fas fa-flower"></i> Flower (Celery Monitor)
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <i class="fas fa-clock"></i> Hourly auto-processing enabled
+                    </div>
+                </div>
             </div>
-        </div>
-        
-        <div class="mt-5">
-            <h3>Recent Requests</h3>
-            <div id="requests" class="mt-3"></div>
+            
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-card">
+                        <h4 class="mb-3"><i class="fas fa-search"></i> Track Your Package</h4>
+                        <form id="trackingForm">
+                            <div class="mb-3">
+                                <label class="form-label"><i class="fas fa-truck"></i> Vendor</label>
+                                <select class="form-select" name="vendor" required>
+                                    <option value="">Select Vendor</option>
+                                    <option value="BPO">BPO</option>
+                                    <option value="STEADFAST">STEADFAST</option>
+                                    <option value="Sundarban">Sundarban</option>
+                                    <option value="REDX">REDX</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label"><i class="fas fa-barcode"></i> Tracking Number</label>
+                                <input type="text" class="form-control" name="tracking_number" placeholder="Enter tracking number" required>
+                            </div>
+                            <button type="submit" class="btn btn-track w-100">
+                                <i class="fas fa-search"></i> Track Package
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="col-lg-8">
+                    <div id="result"></div>
+                    <div class="loading-spinner" id="loadingSpinner">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">Processing your request...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="requests-section">
+                <h3><i class="fas fa-history"></i> Recent Requests</h3>
+                <div id="requests" class="mt-3"></div>
+            </div>
         </div>
     </div>
 
@@ -52,98 +260,186 @@
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData);
             
-            const response = await fetch('/track', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(data)
-            });
+            document.getElementById('loadingSpinner').style.display = 'block';
             
-            const result = await response.json();
-            document.getElementById('result').innerHTML = 
-                `<div class="alert alert-success">
-                    Request submitted! ID: ${result.id}, Status: ${result.status}
-                    <br><small>Will be processed automatically within an hour, or click "Process Now" below</small>
-                </div>`;
-            
-            loadRequests();
+            try {
+                const response = await fetch('/track', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                document.getElementById('result').innerHTML = 
+                    `<div class="alert alert-success">
+                        <h5><i class="fas fa-check-circle"></i> Request Submitted Successfully!</h5>
+                        <p class="mb-1"><strong>Request ID:</strong> ${result.id}</p>
+                        <p class="mb-1"><strong>Status:</strong> <span class="badge bg-warning">${result.status}</span></p>
+                        <small class="text-muted">
+                            <i class="fas fa-info-circle"></i> Will be processed automatically within an hour, or click "Process Now" below
+                        </small>
+                    </div>`;
+                
+                loadRequests();
+            } catch (error) {
+                document.getElementById('result').innerHTML = 
+                    `<div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle"></i> Error submitting request. Please try again.
+                    </div>`;
+            } finally {
+                document.getElementById('loadingSpinner').style.display = 'none';
+            }
         };
 
         async function loadRequests() {
-            const response = await fetch('/requests');
-            const requests = await response.json();
-            
-            document.getElementById('requests').innerHTML = requests.map(req => 
-                `<div class="card mb-2">
-                    <div class="card-body">
-                        <strong>${req.vendor}</strong> - ${req.tracking_number} 
-                        <span class="badge bg-${getStatusColor(req.status)}">${req.status}</span>
-                        ${req.status === 'pending' ? `<button class="btn btn-sm btn-warning ms-2" onclick="processNow(${req.id})">Process Now</button>` : ''}
-                        ${req.status === 'completed' ? `<button class="btn btn-sm btn-info ms-2" onclick="viewResult(${req.id})">View Result</button>` : ''}
-                        <small class="text-muted d-block">${new Date(req.created_at).toLocaleString()}</small>
-                    </div>
-                </div>`
-            ).join('');
-        }
-
-        function getStatusColor(status) {
-            switch(status) {
-                case 'completed': return 'success';
-                case 'processing': return 'primary';
-                case 'failed': return 'danger';
-                default: return 'warning';
+            try {
+                const response = await fetch('/requests');
+                const requests = await response.json();
+                
+                document.getElementById('requests').innerHTML = requests.length > 0 ? requests.map(req => 
+                    `<div class="request-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong><i class="fas fa-truck"></i> ${req.vendor}</strong> - 
+                                <code>${req.tracking_number}</code>
+                                <span class="status-badge ms-2 ${getStatusClass(req.status)}">${req.status}</span>
+                            </div>
+                            <div>
+                                ${req.status === 'pending' ? `<button class="btn btn-warning btn-action" onclick="processNow(${req.id})"><i class="fas fa-play"></i> Process Now</button>` : ''}
+                                ${req.status === 'completed' ? `<button class="btn btn-success btn-action" onclick="viewResult(${req.id})"><i class="fas fa-eye"></i> View Result</button>` : ''}
+                            </div>
+                        </div>
+                        <small class="text-muted">
+                            <i class="fas fa-calendar"></i> ${new Date(req.created_at).toLocaleString()}
+                        </small>
+                    </div>`
+                ).join('') : '<div class="text-center text-muted"><i class="fas fa-inbox"></i> No recent requests</div>';
+            } catch (error) {
+                document.getElementById('requests').innerHTML = 
+                    '<div class="alert alert-warning">Unable to load recent requests</div>';
             }
         }
 
+        function getStatusClass(status) {
+            const statusMap = {
+                'completed': 'bg-success',
+                'processing': 'bg-primary', 
+                'failed': 'bg-danger',
+                'pending': 'bg-warning'
+            };
+            return statusMap[status] || 'bg-secondary';
+        }
+
         async function processNow(requestId) {
-            const response = await fetch(`/process/${requestId}`, { method: 'POST' });
-            const result = await response.json();
-            
-            document.getElementById('result').innerHTML = 
-                `<div class="alert alert-info">${result.message}</div>`;
-            
-            // Refresh requests after a moment
-            setTimeout(loadRequests, 2000);
+            try {
+                const response = await fetch(`/process/${requestId}`, { method: 'POST' });
+                const result = await response.json();
+                
+                document.getElementById('result').innerHTML = 
+                    `<div class="alert alert-info">
+                        <i class="fas fa-cog fa-spin"></i> ${result.message}
+                    </div>`;
+                
+                setTimeout(loadRequests, 2000);
+            } catch (error) {
+                document.getElementById('result').innerHTML = 
+                    `<div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle"></i> Error processing request
+                    </div>`;
+            }
         }
 
         async function viewResult(requestId) {
-            const response = await fetch(`/results/${requestId}`);
-            const result = await response.json();
+            document.getElementById('loadingSpinner').style.display = 'block';
             
-            const events = result.events.map(event => 
-                `<li class="mb-1">
-                    <strong>${new Date(event.event_datetime).toLocaleString()}</strong>: 
-                    ${event.comment} 
-                    ${event.location ? `<span class="badge bg-secondary">${event.location}</span>` : ''}
-                </li>`
-            ).join('');
-            
-            document.getElementById('result').innerHTML = 
-                `<div class="card">
-                    <div class="card-header">
-                        <h5>📦 Tracking Result</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p><strong>From:</strong> ${result.sender}</p>
-                                <p><strong>To:</strong> ${result.receiver}</p>
+            try {
+                const response = await fetch(`/results/${requestId}`);
+                const result = await response.json();
+                
+                const trackingTable = result.events.map(event => {
+                    const eventDate = new Date(event.event_datetime);
+                    const status = getStatusFromComment(event.comment);
+                    
+                    return `
+                        <tr>
+                            <td><strong>${eventDate.getFullYear()}-${String(eventDate.getMonth() + 1).padStart(2, '0')}-${String(eventDate.getDate()).padStart(2, '0')}</strong></td>
+                            <td><strong>${eventDate.toLocaleTimeString()}</strong></td>
+                            <td><span class="status-badge ${getStatusBadgeClass(status)}">${status}</span></td>
+                            <td><strong>${event.comment}</strong></td>
+                            <td>${event.location || 'N/A'}</td>
+                        </tr>
+                    `;
+                }).join('');
+                
+                document.getElementById('result').innerHTML = 
+                    `<div class="result-card">
+                        <div class="result-header">
+                            <h4><i class="fas fa-package"></i> আইটেম আইডি: ${result.tracking_number || 'N/A'}</h4>
+                        </div>
+                        <div class="tracking-info">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong><i class="fas fa-user"></i> From:</strong> ${result.sender || 'N/A'}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong><i class="fas fa-user-check"></i> To:</strong> ${result.receiver || 'N/A'}</p>
+                                </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="text-center">
                                 <p><strong>Current Status:</strong> 
-                                    <span class="badge bg-success">${result.parcel_current_status}</span>
+                                    <span class="status-badge bg-success">${result.parcel_current_status || 'Unknown'}</span>
                                 </p>
                             </div>
                         </div>
-                        <hr>
-                        <h6>📋 Event History:</h6>
-                        <ul class="list-unstyled">${events}</ul>
-                    </div>
-                </div>`;
+                        <div class="table-responsive">
+                            <table class="table tracking-table">
+                                <thead>
+                                    <tr>
+                                        <th>DATE</th>
+                                        <th>TIME</th>
+                                        <th>STATUS</th>
+                                        <th>REMARKS</th>
+                                        <th>Location</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${trackingTable}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>`;
+            } catch (error) {
+                document.getElementById('result').innerHTML = 
+                    `<div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle"></i> Error loading tracking result
+                    </div>`;
+            } finally {
+                document.getElementById('loadingSpinner').style.display = 'none';
+            }
+        }
+
+        function getStatusFromComment(comment) {
+            if (comment.includes('Delivered')) return 'Delivered';
+            if (comment.includes('Received')) return 'Received';
+            if (comment.includes('Landed')) return 'Landed at Branch Office';
+            if (comment.includes('Dispatched')) return 'Dispatched From Branch Office';
+            if (comment.includes('Booked')) return 'Booked';
+            return 'In Transit';
+        }
+
+        function getStatusBadgeClass(status) {
+            if (status.includes('Delivered')) return 'status-delivered';
+            if (status.includes('Received')) return 'status-received';
+            if (status.includes('Landed')) return 'status-landed';
+            if (status.includes('Dispatched')) return 'status-dispatched';
+            if (status.includes('Booked')) return 'status-booked';
+            return 'bg-secondary';
         }
 
         // Auto refresh every 10 seconds
         setInterval(loadRequests, 10000);
         
+        // Load initial data
         loadRequests();
     </script>
 </body>
