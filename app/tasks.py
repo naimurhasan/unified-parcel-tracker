@@ -23,6 +23,7 @@ def process_pending_requests():
     finally:
         db.close()
 
+
 @celery_app.task
 def process_tracking_request(request_id: int):
     """Sync wrapper for async tracking"""
@@ -114,6 +115,7 @@ async def _async_process_tracking_request(request_id: int):
         if request:
             request.status = "failed"
             db.commit()
-        return f"Failed to process request {request_id}: {str(e)}"
+        raise
+
     finally:
         db.close()

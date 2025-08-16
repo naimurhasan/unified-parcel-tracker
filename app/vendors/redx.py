@@ -2,6 +2,7 @@ import httpx
 from typing import List
 from datetime import datetime
 from .base import VendorTracker, TrackingResult, TrackingEvent
+import re
 
 class RedxTracker(VendorTracker):
     
@@ -20,6 +21,17 @@ class RedxTracker(VendorTracker):
         # REDX format validation
         return len(tracking_number) >= 10 and tracking_number.isalnum()
     
+    def extract_location(self, text):
+        # Regex: looks for ' at ' or ' to ', then captures everything until a dot or end of line
+        match = re.search(r'\b(?:reached|to|in)\s+(?!delivery\b)(.+)$', text);
+        if match:
+            location = match.group(1).strip()
+            # If extracted location is too long, probably a false positive
+            if len(location) > 30:
+                return None
+            return location
+        return None
+    
     async def track_package(self, tracking_number: str) -> TrackingResult:
         async with httpx.AsyncClient() as client:
             # Get basic parcel info
@@ -35,11 +47,12 @@ class RedxTracker(VendorTracker):
             events = []
             if not tracking_data.get("isError") and "tracking" in tracking_data:
                 for event in tracking_data["tracking"]:
+                    status = event.get("status", "unknown")
                     events.append(TrackingEvent(
                         datetime=datetime.fromisoformat(event["time"].replace('Z', '+00:00')),
-                        status=event["status"],
+                        status=status,
                         description=event["messageEn"],
-                        location=None
+                        location=self.extract_location(event.get("messageEn", ""))
                     ))
             
             current_status = "unknown"

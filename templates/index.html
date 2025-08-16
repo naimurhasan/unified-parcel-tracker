@@ -420,6 +420,7 @@
 
         function getStatusFromComment(comment) {
             if (comment.includes('Delivered')) return 'Delivered';
+            if (comment.includes('delivered')) return 'Delivered';
             if (comment.includes('Received')) return 'Received';
             if (comment.includes('Landed')) return 'Landed at Branch Office';
             if (comment.includes('Dispatched')) return 'Dispatched From Branch Office';
