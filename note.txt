@@ -45,6 +45,8 @@ https://steadfast.com.bd/t/01K2HMSK8P5AC74H9GABTTX0EG
 
 https://redx.com.bd/track-global-parcel/?trackingId=24A6A5WE157GB0
 
+https://www.dhl.com/bd-en/home/tracking.html?tracking-id=6761952853&submit=1&inputsource=marketingstage
+
 make event as a Model
 
 SET events = '[

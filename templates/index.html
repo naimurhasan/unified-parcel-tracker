@@ -264,7 +264,7 @@
             document.getElementById('loadingSpinner').style.display = 'block';
             
             try {
-                const response = await fetch('/track', {
+                const response = await fetch('/api/v1/track', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify(data)
@@ -294,7 +294,7 @@
 
         async function loadRequests() {
             try {
-                const response = await fetch('/requests');
+                const response = await fetch('/api/v1/requests?limit=10');
                 const requests = await response.json();
                 
                 document.getElementById('requests').innerHTML = requests.length > 0 ? requests.map(req => 
@@ -333,7 +333,7 @@
 
         async function processNow(requestId) {
             try {
-                const response = await fetch(`/process/${requestId}`, { method: 'POST' });
+                const response = await fetch(`/api/v1/process/${requestId}`, { method: 'POST' });
                 const result = await response.json();
                 
                 document.getElementById('result').innerHTML = 
@@ -354,7 +354,7 @@
             document.getElementById('loadingSpinner').style.display = 'block';
             
             try {
-                const response = await fetch(`/results/${requestId}`);
+                const response = await fetch(`/api/v1/results/${requestId}`);
                 const result = await response.json();
                 
                 const trackingTable = result.events.map(event => {

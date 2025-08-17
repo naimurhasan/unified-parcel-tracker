@@ -13,11 +13,6 @@ class RequestResponse(BaseModel):
     status: str
     created_at: datetime
 
-class EventData(BaseModel):
-    datetime: str
-    comment: str
-    location: Optional[str] = None
-
 class EventResponse(BaseModel):
     id: int
     event_datetime: datetime
