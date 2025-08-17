@@ -42,6 +42,9 @@ async def _async_process_tracking_request(request_id: int):
         result_value = request_id * 7 + 42
         print(f"Processing request {request_id}: {request_id} * 7 + 42 = {result_value}")
         
+        # Initialize is_error_result
+        is_error_result = True
+        
         # Try vendor plugin first
         if vendor_registry.is_supported(request.vendor):
             try:

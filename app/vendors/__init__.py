@@ -3,11 +3,13 @@ from .redx import RedxTracker
 from .bpo import BpoTracker
 from .steadfast import SteadfastTracker
 from .sundarban import SundarbanTracker
+from .dhl import DhlTracker
 
 # Auto-register all vendors
 vendor_registry.register(RedxTracker)
 vendor_registry.register(BpoTracker)
 vendor_registry.register(SteadfastTracker)
 vendor_registry.register(SundarbanTracker)
+vendor_registry.register(DhlTracker)
 
 __all__ = ['vendor_registry']
