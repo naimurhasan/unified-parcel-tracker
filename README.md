@@ -23,32 +23,6 @@ It integrates background task processing, a PostgreSQL database, and Redis-based
 
 ---
 
-## 🧱 Project Structure
-
-```
-unified-parcel-tracker/
-│
-├── app/
-│   ├── __init__.py
-│   ├── celery_app.py          # Celery configuration
-│   ├── database.py            # PostgreSQL database connection
-│   ├── main.py                # Main web entry point (FastAPI/Flask app)
-│   ├── models.py              # ORM models for parcels, vendors, etc.
-│   ├── schemas.py             # Pydantic schemas for API validation
-│   ├── tasks.py               # Background tasks for parcel updates
-│   ├── vendors/               # Vendor-specific API integration logic
-│   └── templates/             # HTML templates for the frontend
-│
-├── Dockerfile
-├── docker-compose.yml
-├── requirements.txt
-├── note.txt
-├── .gitignore
-└── 0d1aa64d-e5a7-43c0-82a9-6f5195990e01.mp4  # Demo video
-```
-
----
-
 ## ⚙️ Tech Stack
 
 | Component            | Technology Used                        |
