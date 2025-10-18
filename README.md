@@ -1,7 +1,3 @@
-Here’s a polished and professional **README.md** for your project **unified-parcel-tracker**, written to look clean and realistic for a GitHub repository — explaining the stack, purpose, and usage based on your provided setup and structure.
-
----
-
 # 📦 Unified Parcel Tracker
 
 **Unified Parcel Tracker** is a containerized web application designed to **track parcels from multiple courier services** through a single unified dashboard.
