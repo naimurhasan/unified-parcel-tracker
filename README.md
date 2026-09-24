@@ -113,7 +113,7 @@ celery -A app.celery_app flower --port=5555
 
 ## 🧠 Notes
 
-* The project is still in active development — API endpoints and UI design may evolve.
+* The project is a smaller prototype version of the project delivered to actual client
 * To integrate new courier APIs, add a new module under `app/vendors/` and register it with the main tracking system.
 
 ---
